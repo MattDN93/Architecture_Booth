@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -14,6 +15,9 @@ public:
 	void toBinary();
 	void sum();
 	void rightShift();
+
+	ifstream inValues;
+	ofstream outValues;
 
 	int carry;				//carry bit
 	int count;				//count variable
@@ -34,4 +38,16 @@ unsignedBinMult::unsignedBinMult()
 
 unsignedBinMult::~unsignedBinMult()
 {
+}
+
+void main()
+{
+	unsignedBinMult ubm;
+	ubm.inValues.open("valuesToMult.txt");
+	ubm.inValues >> ubm.input_M >> ubm.input_Q;
+
+	ubm.outValues.open("valuesToDisplay.txt");
+	ubm.outValues << "Successfully read from C++ execution." << endl;
+	ubm.outValues << ubm.input_M << ubm.input_Q;
+
 }
