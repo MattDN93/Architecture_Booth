@@ -15,7 +15,8 @@ public:
 	void sum();
 	void rightShift();
 
-	int carry;
+	int carry;				//carry bit
+	int count;				//count variable
 
 	int input_M;			//multiplicand in integer form
 	vector <int> bin_M;		//multiplicand in binary form

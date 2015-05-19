@@ -14,6 +14,18 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles doMultButton.Click
+        If q_InputTextBox.Text = "" Or m_InputTextBox.Text = "" Then
+            MsgBox("You have not entered one of the values needed. Please try again.", MsgBoxStyle.Information, "Value Missing!")
+            Exit Sub
+        End If
+
+        Try
+            My.Computer.FileSystem.WriteAllText("valuesToMult.txt",
+             m_InputTextBox.Text + " " + q_InputTextBox.Text, False)
+        Catch ex As IO.IOException
+            MsgBox("The fil could not be created/written to. Can't continue.", MsgBoxStyle.Critical, "An I/O Error Occurred!")
+            Exit Sub
+        End Try
         outputListBox.Items.Add("this is a test")
     End Sub
 
