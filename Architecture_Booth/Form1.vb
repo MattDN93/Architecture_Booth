@@ -26,8 +26,7 @@
         Select Case procChoiceList.SelectedItem
             Case "Unsigned number multiplication"
         End Select
-        = "Unsigned number multiplication" Then
-        unsignedMult = True
-        End If
+       
+
     End Sub
 End Class

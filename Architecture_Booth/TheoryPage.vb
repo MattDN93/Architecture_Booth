@@ -15,7 +15,7 @@ Public Class TheoryPage
     Private Sub TheoryPage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Form1.unsignedMult = True Then
             PictureBox1.Show()
-            PictureBox1.Image = CType(My.Resources.ResourceManager.GetObject(String.Format("unsignedBin")), Image)
+            PictureBox1.Image = CType(My.Resources.ResourceManager.GetObject(String.Format("unsignedBin.png")), Image)
         ElseIf Form1.rad2Booth = True Then
             PictureBox1.Image = CType(My.Resources.ResourceManager.GetObject(String.Format("rad2Booth")), Image)
         ElseIf Form1.rad4Booth = True Then
