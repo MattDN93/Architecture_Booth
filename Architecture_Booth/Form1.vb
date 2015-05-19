@@ -23,6 +23,11 @@
     End Sub
 
     Private Sub procChoiceList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles procChoiceList.SelectedIndexChanged
-
+        Select Case procChoiceList.SelectedItem
+            Case "Unsigned number multiplication"
+        End Select
+        = "Unsigned number multiplication" Then
+        unsignedMult = True
+        End If
     End Sub
 End Class
