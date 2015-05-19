@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
-
+#include <string>
 using namespace std;
 
 class unsignedBinMult
@@ -23,9 +23,11 @@ public:
 	int count;				//count variable
 
 	int input_M;			//multiplicand in integer form
+	string m_string;
 	vector <int> bin_M;		//multiplicand in binary form
 
 	int input_Q;			//multiplier in integer form
+	string q_string;
 	vector <int> bin_Q;		//multiplier in binary form
 
 	vector <int> acc;		//accumulator
@@ -44,7 +46,8 @@ void main()
 {
 	unsignedBinMult ubm;
 	ubm.inValues.open("valuesToMult.txt");
-	ubm.inValues >> ubm.input_M >> ubm.input_Q;
+	getline(ubm.inValues,ubm.m_string);
+	getline(ubm.inValues, ubm.q_string);
 
 	ubm.outValues.open("valuesToDisplay.txt");
 	ubm.outValues << "Successfully read from C++ execution." << endl;

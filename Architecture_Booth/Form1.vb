@@ -21,11 +21,25 @@
 
         Try
             My.Computer.FileSystem.WriteAllText("valuesToMult.txt",
-             m_InputTextBox.Text + " " + q_InputTextBox.Text, False)
+             m_InputTextBox.Text + vbCrLf + q_InputTextBox.Text, False)
         Catch ex As IO.IOException
-            MsgBox("The fil could not be created/written to. Can't continue.", MsgBoxStyle.Critical, "An I/O Error Occurred!")
+            MsgBox("The file could not be created/written to. Can't continue.", MsgBoxStyle.Critical, "An I/O Error Occurred!")
             Exit Sub
         End Try
+
+        Try
+            Process.Start(Application.StartupPath & "\\Debug\unsignedBinaryMult.exe")
+        Catch ex As System.ComponentModel.Win32Exception
+            MsgBox("Process could not be started. Execution halted!", MsgBoxStyle.Critical, "Couldn't Open Process!")
+            Exit Sub
+        End Try
+        Try
+            procText = My.Computer.FileSystem.ReadAllText("valuesToDisplay.txt")
+        Catch ex As IO.FileNotFoundException
+            MsgBox("The file could not be read from. Can't continue.", MsgBoxStyle.Critical, "An I/O Error Occurred!")
+            Exit Sub
+        End Try
+        outputListBox.Items.Add(procText)
         outputListBox.Items.Add("this is a test")
     End Sub
 
