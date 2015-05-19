@@ -7,6 +7,7 @@
     Friend rad4Booth As Boolean = False
     Friend rad8Booth As Boolean = False
 
+    Friend m_q_concat As String = ""
     Friend procText As String = ""
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
@@ -27,12 +28,29 @@
             Exit Sub
         End Try
 
+        m_q_concat = m_InputTextBox.Text + " " + q_InputTextBox.Text
+
+        Dim ubmProcess As System.Diagnostics.Process
         Try
-            Process.Start(Application.StartupPath & "\\Debug\unsignedBinaryMult.exe")
+            ubmProcess = New System.Diagnostics.Process()
+            ubmProcess.StartInfo.FileName = "unsignedBinaryMult.exe"
+            ubmProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
+            ubmProcess.StartInfo.Arguments = m_q_concat
+            ubmProcess.Start()
+
+            'Wait until the process passes back an exit code 
+            ubmProcess.WaitForExit()
+
+            'Free resources associated with this process
+            ubmProcess.Close()
+            'Catch
+            'Try
+            '    Process.Start(Application.StartupPath & "\\unsignedBinaryMult.exe", m_q_concat)
         Catch ex As System.ComponentModel.Win32Exception
             MsgBox("Process could not be started. Execution halted!", MsgBoxStyle.Critical, "Couldn't Open Process!")
             Exit Sub
         End Try
+
         Try
             procText = My.Computer.FileSystem.ReadAllText("valuesToDisplay.txt")
         Catch ex As IO.FileNotFoundException
