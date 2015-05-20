@@ -26,19 +26,19 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.procChoiceList = New System.Windows.Forms.ComboBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.m_InputTextBox = New System.Windows.Forms.TextBox()
-        Me.q_InputTextBox = New System.Windows.Forms.TextBox()
-        Me.doMultButton = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.TheoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnsignedBinaryMultiplicationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SignedRadix2BoothToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HigherOrderMultiplicationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.procChoiceList = New System.Windows.Forms.ComboBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.q_InputTextBox = New System.Windows.Forms.TextBox()
+        Me.m_InputTextBox = New System.Windows.Forms.TextBox()
+        Me.doMultButton = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.outputListBox = New System.Windows.Forms.ListBox()
         Me.MenuStrip1.SuspendLayout()
@@ -83,6 +83,31 @@ Partial Class Form1
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.AboutToolStripMenuItem.Text = "About"
         '
+        'TheoryToolStripMenuItem
+        '
+        Me.TheoryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UnsignedBinaryMultiplicationToolStripMenuItem, Me.SignedRadix2BoothToolStripMenuItem, Me.HigherOrderMultiplicationToolStripMenuItem})
+        Me.TheoryToolStripMenuItem.Name = "TheoryToolStripMenuItem"
+        Me.TheoryToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
+        Me.TheoryToolStripMenuItem.Text = "Theory"
+        '
+        'UnsignedBinaryMultiplicationToolStripMenuItem
+        '
+        Me.UnsignedBinaryMultiplicationToolStripMenuItem.Name = "UnsignedBinaryMultiplicationToolStripMenuItem"
+        Me.UnsignedBinaryMultiplicationToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
+        Me.UnsignedBinaryMultiplicationToolStripMenuItem.Text = "Unsigned Binary Multiplication"
+        '
+        'SignedRadix2BoothToolStripMenuItem
+        '
+        Me.SignedRadix2BoothToolStripMenuItem.Name = "SignedRadix2BoothToolStripMenuItem"
+        Me.SignedRadix2BoothToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
+        Me.SignedRadix2BoothToolStripMenuItem.Text = "Signed Radix 2 Booth Mult."
+        '
+        'HigherOrderMultiplicationToolStripMenuItem
+        '
+        Me.HigherOrderMultiplicationToolStripMenuItem.Name = "HigherOrderMultiplicationToolStripMenuItem"
+        Me.HigherOrderMultiplicationToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
+        Me.HigherOrderMultiplicationToolStripMenuItem.Text = "Higher Order Multiplication"
+        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.procChoiceList)
@@ -118,37 +143,14 @@ Partial Class Form1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Enter numbers:"
         '
-        'm_InputTextBox
+        'Label5
         '
-        Me.m_InputTextBox.Location = New System.Drawing.Point(11, 21)
-        Me.m_InputTextBox.Name = "m_InputTextBox"
-        Me.m_InputTextBox.Size = New System.Drawing.Size(87, 20)
-        Me.m_InputTextBox.TabIndex = 0
-        '
-        'q_InputTextBox
-        '
-        Me.q_InputTextBox.Location = New System.Drawing.Point(122, 21)
-        Me.q_InputTextBox.Name = "q_InputTextBox"
-        Me.q_InputTextBox.Size = New System.Drawing.Size(89, 20)
-        Me.q_InputTextBox.TabIndex = 1
-        '
-        'doMultButton
-        '
-        Me.doMultButton.Location = New System.Drawing.Point(7, 22)
-        Me.doMultButton.Name = "doMultButton"
-        Me.doMultButton.Size = New System.Drawing.Size(51, 23)
-        Me.doMultButton.TabIndex = 2
-        Me.doMultButton.Text = "Go!"
-        Me.doMultButton.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(14, 45)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(81, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Multiplicand (M)"
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(136, 45)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(62, 13)
+        Me.Label5.TabIndex = 5
+        Me.Label5.Text = "Multiplier(Q)"
         '
         'Label4
         '
@@ -159,39 +161,37 @@ Partial Class Form1
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "X"
         '
-        'TheoryToolStripMenuItem
+        'Label3
         '
-        Me.TheoryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UnsignedBinaryMultiplicationToolStripMenuItem, Me.SignedRadix2BoothToolStripMenuItem, Me.HigherOrderMultiplicationToolStripMenuItem})
-        Me.TheoryToolStripMenuItem.Name = "TheoryToolStripMenuItem"
-        Me.TheoryToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
-        Me.TheoryToolStripMenuItem.Text = "Theory"
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(14, 45)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(81, 13)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Multiplicand (M)"
         '
-        'UnsignedBinaryMultiplicationToolStripMenuItem
+        'q_InputTextBox
         '
-        Me.UnsignedBinaryMultiplicationToolStripMenuItem.Name = "UnsignedBinaryMultiplicationToolStripMenuItem"
-        Me.UnsignedBinaryMultiplicationToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
-        Me.UnsignedBinaryMultiplicationToolStripMenuItem.Text = "Unsigned Binary Multiplication"
+        Me.q_InputTextBox.Location = New System.Drawing.Point(122, 21)
+        Me.q_InputTextBox.Name = "q_InputTextBox"
+        Me.q_InputTextBox.Size = New System.Drawing.Size(89, 20)
+        Me.q_InputTextBox.TabIndex = 1
         '
-        'SignedRadix2BoothToolStripMenuItem
+        'm_InputTextBox
         '
-        Me.SignedRadix2BoothToolStripMenuItem.Name = "SignedRadix2BoothToolStripMenuItem"
-        Me.SignedRadix2BoothToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
-        Me.SignedRadix2BoothToolStripMenuItem.Text = "Signed Radix 2 Booth Mult."
+        Me.m_InputTextBox.Location = New System.Drawing.Point(11, 21)
+        Me.m_InputTextBox.Name = "m_InputTextBox"
+        Me.m_InputTextBox.Size = New System.Drawing.Size(87, 20)
+        Me.m_InputTextBox.TabIndex = 0
         '
-        'HigherOrderMultiplicationToolStripMenuItem
+        'doMultButton
         '
-        Me.HigherOrderMultiplicationToolStripMenuItem.Name = "HigherOrderMultiplicationToolStripMenuItem"
-        Me.HigherOrderMultiplicationToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
-        Me.HigherOrderMultiplicationToolStripMenuItem.Text = "Higher Order Multiplication"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(136, 45)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(62, 13)
-        Me.Label5.TabIndex = 5
-        Me.Label5.Text = "Multiplier(Q)"
+        Me.doMultButton.Location = New System.Drawing.Point(7, 22)
+        Me.doMultButton.Name = "doMultButton"
+        Me.doMultButton.Size = New System.Drawing.Size(51, 23)
+        Me.doMultButton.TabIndex = 2
+        Me.doMultButton.Text = "Go!"
+        Me.doMultButton.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
