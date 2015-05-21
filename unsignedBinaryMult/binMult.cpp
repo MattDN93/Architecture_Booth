@@ -7,7 +7,7 @@
 #include <string>
 using namespace std;
 
-#define DEBUG 1
+#define DEBUG 0
 #define BITSIZE 16
 
 class unsignedBinMult
@@ -76,6 +76,11 @@ void main(int argc, char** argv)
 
 	ubm.toBinary(ubm.input_M, ubm.input_Q);			//convert M and Q to binary
 	ubm.doMult();									// do the multiplication
+
+	ubm.outValues << "\n--------------------------" << endl;
+	ubm.outValues << "\nResult: "; ubm.outIntArr(ubm.acc); ubm.outValues << " "; ubm.outIntArr(ubm.bin_Q);
+	ubm.outValues << "\n--------------------------" << endl;
+	ubm.outValues.close();							//close the file
 
 
 }
