@@ -7,6 +7,8 @@
 #include <string>
 using namespace std;
 
+#define DEBUG 1
+
 class unsignedBinMult
 {
 public:
@@ -46,29 +48,44 @@ unsignedBinMult::~unsignedBinMult()
 void main(int argc, char** argv)
 {
 	unsignedBinMult ubm;
-	/*ubm.inValues.open("valuesToMult.txt");
-	getline(ubm.inValues,ubm.m_string);
-	getline(ubm.inValues, ubm.q_string);*/
 
-	ubm.input_M = atoi(argv[1]);
-	ubm.input_Q = atoi(argv[2]);
+	if (DEBUG)
+	{
+		ubm.input_M = 12/*atoi(argv[1])*/;
+		ubm.input_Q = 13/*atoi(argv[2])*/;
+	}
+	if (!DEBUG)
+	{
+		ubm.input_M = atoi(argv[1]);
+		ubm.input_Q = atoi(argv[2]);
+	}
+
 
 	ubm.outValues.open("valuesToDisplay.txt");
 	//ubm.outValues << "Successfully read from C++ execution." << endl;
+	ubm.outValues << "\nValues Entered:" << endl;
 	ubm.outValues << ubm.input_M <<"\t"<< ubm.input_Q;
+
+	ubm.toBinary(ubm.input_M, ubm.input_Q);			//convert M and Q to binary
+
+
 
 }
 
 void unsignedBinMult::toBinary(int m_in, int q_in)
 {
+	bin_M.resize(8);
+	bin_Q.resize(8);
 	int b = 8;
-	outValues << "Binary Value Built:" << endl;
-	outValues << "\nMultiplicand:" << endl;
+
+	outValues << "\nBinary Value Built:" << endl;
+	outValues << "\nMultiplicand(M):";
 	outValues << "\n--------------------------" << endl;
+
 	while (m_in != 0)
 	{
 		bin_M[--b] = m_in % 2;
-		outValues << bin_M[b];
+		//outValues << bin_M[b];
 		m_in /= 2;
 	}
 
@@ -77,23 +94,28 @@ void unsignedBinMult::toBinary(int m_in, int q_in)
 		outValues << bin_M[i];
 	}
 
-	outValues << "\nMultiplier:" << endl;
-	outValues << "\n--------------------------" << endl;
+	outValues << "\n\nMultiplier (Q):" << endl;
+	outValues << "--------------------------" << endl;
+
+	b = 8;							//reset the value of the counter 
 
 	while (q_in != 0)
 	{
-		bin_M[--b] = m_in % 2;
-		outValues << bin_Q[b];
-		m_in /= 2;
+		bin_Q[--b] = q_in % 2;
+		//outValues << bin_Q[b];
+		q_in /= 2;
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
 		outValues << bin_Q[i];
 	}
+	outValues << "\n\nMultiplier Q0: " << bin_Q[0]<< endl;
 
-	
 
+	if (DEBUG){
+		system("pause");
+	}
 
 
 }
