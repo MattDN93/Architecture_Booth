@@ -7,8 +7,8 @@
 #include <string>
 using namespace std;
 
-#define DEBUG 0
-#define BITSIZE 16
+#define DEBUG 0							//set this to enable debug features
+#define BITSIZE 16						//bit-length of the values
 
 class unsignedBinMult
 {
@@ -17,30 +17,29 @@ public:
 	~unsignedBinMult();
 
 	void toBinary(int,int);
-	void sum();
-	void rightShift();
-	void doMult();				//perform the multiplication
+	void sum();							//add 2 binary values 16-bit
+	void rightShift();					//method for Logical Right Shift
+	void doMult();						//perform the multiplication
 	void outIntArr(vector <int>);		//displays integer content to user
-	void dispLines(string,int);
+	void dispLines(string,int);			//standard method to print iterations
 
-	ifstream inValues;
+	ifstream inValues;					//file objects for file I/O
 	ofstream outValues;
 
-	int carry;				//carry bit
-	int count;				//count variable
+	int carry;							//carry bit
+	int count;							//count variable
 
-	int input_M = 0;			//multiplicand in integer form
-	string m_string="";		//stored string rep of binary value
-	vector <int> bin_M;		//multiplicand in binary form
+	int input_M = 0;					//multiplicand in integer form
+	string m_string="";					//stored string rep of binary value
+	vector <int> bin_M;					//multiplicand in binary form
 
-	int input_Q = 0;			//multiplier in integer form
-	string q_string="";		//stored string rep of binary value
-	vector <int> bin_Q;		//multiplier in binary form
+	int input_Q = 0;					//multiplier in integer form
+	string q_string="";					//stored string rep of binary value
+	vector <int> bin_Q;					//multiplier in binary form
 
-	vector <int> acc;		//accumulator
-	string acc_string = "";
-
-	string adding = "C,A <- A + M";
+	vector <int> acc;					//accumulator
+	
+	string adding = "C,A <- A + M";		//output strings
 	string r_shifting = "RightShift";
 
 };
@@ -53,9 +52,9 @@ unsignedBinMult::~unsignedBinMult()
 {
 }
 
-void main(int argc, char** argv)
+void main(int argc, char** argv)		//main receiving arguments (M and Q)
 {
-	unsignedBinMult ubm;
+	unsignedBinMult ubm;				//instantiate object of class
 
 	if (DEBUG)
 	{
@@ -85,7 +84,7 @@ void main(int argc, char** argv)
 
 }
 
-void unsignedBinMult::outIntArr(vector <int> arr)
+void unsignedBinMult::outIntArr(vector <int> arr)	//output parameters
 {
 	for (int i = 0; i < BITSIZE; i++)
 	{
@@ -93,7 +92,7 @@ void unsignedBinMult::outIntArr(vector <int> arr)
 	}
 }
 
-void unsignedBinMult::toBinary(int m_in, int q_in)
+void unsignedBinMult::toBinary(int m_in, int q_in)	//conversion decimal -> binary
 {
 	bin_M.resize(BITSIZE);
 	bin_Q.resize(BITSIZE);
@@ -106,7 +105,7 @@ void unsignedBinMult::toBinary(int m_in, int q_in)
 	outValues << "\nMultiplicand(M):";
 	outValues << "\n--------------------------" << endl;
 
-	while (m_in != 0)
+	while (m_in != 0)											//converts m to binary
 	{
 		bin_M[--b] = m_in % 2;
 		//outValues << bin_M[b];
@@ -123,7 +122,7 @@ void unsignedBinMult::toBinary(int m_in, int q_in)
 
 	b = BITSIZE;							//reset the value of the counter 
 
-	while (q_in != 0)
+	while (q_in != 0)						//converts Q to binary
 	{
 		bin_Q[--b] = q_in % 2;
 		//outValues << bin_Q[b];
@@ -144,7 +143,7 @@ void unsignedBinMult::toBinary(int m_in, int q_in)
 
 }
 
-void unsignedBinMult::doMult()
+void unsignedBinMult::doMult()						//perform the unsigned binary multiplication
 {
 	acc.resize(BITSIZE);
 	count = BITSIZE;
@@ -155,17 +154,17 @@ void unsignedBinMult::doMult()
 	outValues << "\n" << upcount << "\t\tInit\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << endl;
 	
 	
-	while (count > 0){
+	while (count > 0){											//while counts are still remaining
 		upcount++;
-		if (bin_Q[BITSIZE-1] == 1)
+		if (bin_Q[BITSIZE-1] == 1)								//start at LSB side of binary value
 		{
-			sum();
+			sum();												//if LSB = 1 do a addition
 			dispLines(adding,upcount);
 		}
-		rightShift();
+		rightShift();											//..and either just right shift or RS and add
 		count = count - 1;
 		dispLines(r_shifting,upcount);
-	} /*while (count > 0);*/
+	} 
 	
 }
 
@@ -174,7 +173,7 @@ void unsignedBinMult::dispLines(string process, int upcount)
 	outValues << "\n" << upcount << "\t\t" << process << "\t\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << "\n";
 }
 
-void unsignedBinMult::sum()
+void unsignedBinMult::sum()										//addition process
 {
 	
 		carry = 0;
@@ -192,11 +191,11 @@ void unsignedBinMult::sum()
 
 }
 
-void unsignedBinMult::rightShift()
+void unsignedBinMult::rightShift()						//do the right shift
 {
 	int temp = 0;
 
-	temp = acc[BITSIZE-1];
+	temp = acc[BITSIZE-1];								//ensure bits from ACC LSB go to Q MSB
 	// = qr[0];
 	cout << "\t\tashr\t\t";
 	for (int i = BITSIZE - 1; i > 0 ; i--)

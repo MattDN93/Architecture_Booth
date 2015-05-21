@@ -21,6 +21,14 @@
             Exit Sub
         End If
 
+        If q_InputTextBox.Text > 65536 Or m_InputTextBox.Text > 65536 Then
+            MsgBox("You have entered a value greater than 16-bit binary storage allows. Please enter a number < 65536 ", MsgBoxStyle.Information, "Value Out-of-Range!")
+            q_InputTextBox.Clear()
+            m_InputTextBox.Clear()
+            Exit Sub
+        End If
+
+
         Try
             My.Computer.FileSystem.WriteAllText("valuesToMult.txt",
              m_InputTextBox.Text + vbCrLf + q_InputTextBox.Text, False)
