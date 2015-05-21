@@ -148,7 +148,7 @@
                 q_InputTextBox.Enabled = False
                 m_InputTextBox.Enabled = False
         End Select
-       
+
 
     End Sub
 
