@@ -21,6 +21,7 @@ public:
 	void rightShift();
 	void doMult();				//perform the multiplication
 	void outIntArr(vector <int>);		//displays integer content to user
+	void dispLines(string,int);
 
 	ifstream inValues;
 	ofstream outValues;
@@ -144,12 +145,31 @@ void unsignedBinMult::doMult()
 {
 	acc.resize(BITSIZE);
 	count = 8;
+	int upcount = 0;
 
 	outValues << "\n\n-----------------------" << endl;
 	outValues << "\nStep\tProcess\t\t Multiplicand (M) \t Accumulator (A) \t Multiplier(Q) \tCount(n)" << endl;
-	outValues << "\n" << count << "\t\tInit\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << endl;
-	if (bin_Q[0] == 1)
+	outValues << "\n" << upcount << "\t\tInit\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << endl;
+	
+	do
 	{
-
-	}
+		upcount++;
+		if (bin_Q[0] == 1)
+		{
+			upcount++;
+			sum();
+			dispLines(adding,upcount);
+		}
+		rightShift();
+		count = count - 1;
+		dispLines(r_shifting,upcount);
+	} while (count > 0);
+	
 }
+
+void unsignedBinMult::dispLines(string process, int upcount)
+{
+	outValues << "\n" << upcount << "\t\t"<< process <<"\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << endl;
+}
+
+
