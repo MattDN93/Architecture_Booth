@@ -62,13 +62,38 @@ void main(int argc, char** argv)
 void unsignedBinMult::toBinary(int m_in, int q_in)
 {
 	int b = 8;
+	outValues << "Binary Value Built:" << endl;
+	outValues << "\nMultiplicand:" << endl;
+	outValues << "\n--------------------------" << endl;
 	while (m_in != 0)
 	{
 		bin_M[--b] = m_in % 2;
-		outValues << "Binary Value Built:" << endl;
-		
+		outValues << bin_M[b];
 		m_in /= 2;
 	}
+
+	for (int i = 0; i < 8; i++)
+	{
+		outValues << bin_M[i];
+	}
+
+	outValues << "\nMultiplier:" << endl;
+	outValues << "\n--------------------------" << endl;
+
+	while (q_in != 0)
+	{
+		bin_M[--b] = m_in % 2;
+		outValues << bin_Q[b];
+		m_in /= 2;
+	}
+
+	for (int i = 0; i < 8; i++)
+	{
+		outValues << bin_Q[i];
+	}
+
+	
+
 
 
 }
