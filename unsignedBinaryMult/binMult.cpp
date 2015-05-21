@@ -59,8 +59,8 @@ void main(int argc, char** argv)
 
 	if (DEBUG)
 	{
-		ubm.input_M = 12;
-		ubm.input_Q = 13;
+		ubm.input_M = 22;
+		ubm.input_Q = 2;
 	}
 	if (!DEBUG)
 	{
@@ -94,8 +94,6 @@ void unsignedBinMult::toBinary(int m_in, int q_in)
 	bin_Q.resize(BITSIZE);
 	m_string.resize(BITSIZE);
 	q_string.resize(BITSIZE);
-
-
 
 	int b = BITSIZE;
 
@@ -144,32 +142,63 @@ void unsignedBinMult::toBinary(int m_in, int q_in)
 void unsignedBinMult::doMult()
 {
 	acc.resize(BITSIZE);
-	count = 8;
+	count = BITSIZE;
 	int upcount = 0;
 
 	outValues << "\n\n-----------------------" << endl;
-	outValues << "\nStep\tProcess\t\t Multiplicand (M) \t Accumulator (A) \t Multiplier(Q) \tCount(n)" << endl;
+	outValues << "\nStep\tProcess\t\t\t Multiplicand (M) \t Accumulator (A) \t Multiplier(Q) \tCount(n)" << endl;
 	outValues << "\n" << upcount << "\t\tInit\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << endl;
 	
-	do
-	{
+	
+	while (count > 0){
 		upcount++;
-		if (bin_Q[0] == 1)
+		if (bin_Q[BITSIZE-1] == 1)
 		{
-			upcount++;
 			sum();
 			dispLines(adding,upcount);
 		}
 		rightShift();
 		count = count - 1;
 		dispLines(r_shifting,upcount);
-	} while (count > 0);
+	} /*while (count > 0);*/
 	
 }
 
 void unsignedBinMult::dispLines(string process, int upcount)
 {
-	outValues << "\n" << upcount << "\t\t"<< process <<"\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << endl;
+	outValues << "\n" << upcount << "\t\t"<< process <<"\t\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << endl;
 }
 
+void unsignedBinMult::sum()
+{
+	
+		carry = 0;
+		for (int i = 0; i < BITSIZE; i++)				//for the length of the data
+		{
+			acc[i] = acc[i] + bin_M[i] + carry;				//perform addition A <- A + M
+			if (acc[i] > 1)
+			{
+				acc[i] = acc[i] % 2;					//deal with a carry
+				carry = 1;
+			}
+			else
+				carry = 0;
+		}
 
+}
+
+void unsignedBinMult::rightShift()
+{
+	int temp = 0;
+
+	temp = acc[BITSIZE-1];
+	// = qr[0];
+	cout << "\t\tashr\t\t";
+	for (int i = BITSIZE - 1; i > 0 ; i--)
+	{
+		acc[i] = acc[i - 1];
+		bin_Q[i] = bin_Q[i - 1];
+	}
+	bin_Q[0] = temp;
+
+}
