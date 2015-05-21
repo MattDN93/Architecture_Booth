@@ -1,13 +1,17 @@
-#include<iostream>
-#include<conio.h>
-
+#include <Windows.h>
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+#include <string>
+#include <conio.h>
 using namespace std;
 
 void add(int a[], int x[], int qrn);
 void complement(int a[], int n)
 {
 	int i;
-	int test;
 
 	int x[8] = { NULL };
 	x[0] = 1;
@@ -62,16 +66,36 @@ void display(int ac[], int qr[], int qrn)
 
 }
 
+class Radix2Booth
+{
+public:
+	Radix2Booth();
+	~Radix2Booth();
+
+	ifstream inValues;
+	ofstream outValues;
+
+	int input_M = 0;		//multiplicand in integer form
+	string m_string;
+	vector <int> bin_M;		//multiplicand in binary form
+
+	int input_Q = 0;		//multiplier in integer form
+	string q_string;
+	vector <int> bin_Q;		//multiplier in binary form
+
+};
+
+
+
 int main(int argc, char **argv)
 {
+	Radix2Booth b2;
+
+	b2.input_M = atoi(argv[1]);
+	b2.input_Q = atoi(argv[2]);
+
 	int mt[10], br[10], qr[10], sc, ac[10] = { 0 };
 	int brn, qrn, i, qn, temp;
-	cout
-		<< "\n--Enter the multiplicand and multipier in signed 2's complement form if negative--";
-
-	cout << "\n Number of multiplicand bit=";
-	cin >> brn;
-	cout << "\nmultiplicand=";
 
 	for (i = brn - 1; i >= 0; i--)
 		cin >> br[i]; //multiplicand
