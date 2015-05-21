@@ -7,6 +7,7 @@ void add(int a[], int x[], int qrn);
 void complement(int a[], int n)
 {
 	int i;
+	int test;
 
 	int x[8] = { NULL };
 	x[0] = 1;
