@@ -242,7 +242,7 @@ int main(int argc, char **argv)
 			{
 				b2.flag=true;
 				b2.add();
-				b2.outValues << "\t\tAddition\t";
+				b2.outValues << "\t           Addition\t\t";
 				for (int i = b2.n_Q - 1; i >= 0; i--)
 					b2.outValues << b2.acc[i];
 				temp = 0;
