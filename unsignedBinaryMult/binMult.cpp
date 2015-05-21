@@ -151,7 +151,7 @@ void unsignedBinMult::doMult()
 	int upcount = 0;
 
 	outValues << "\n\n-----------------------" << endl;
-	outValues << "\nStep\tProcess\t\t\t Multiplicand (M) \t Accumulator (A) \t Multiplier(Q) \tCount(n)" << endl;
+	outValues << "\nStep\tProcess\t\t\t\t Multiplicand (M) \t\t\t Accumulator (A) \t\t\t Multiplier(Q) \t\t\tCount(n)" << endl;
 	outValues << "\n" << upcount << "\t\tInit\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << endl;
 	
 	
@@ -171,7 +171,7 @@ void unsignedBinMult::doMult()
 
 void unsignedBinMult::dispLines(string process, int upcount)
 {
-	outValues << "\n" << upcount << "\t\t"<< process <<"\t\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << endl;
+	outValues << "\n" << upcount << "\t\t" << process << "\t\t\t"; outIntArr(bin_M); outValues << "\t"; outIntArr(acc); outValues << "\t"; outIntArr(bin_Q); outValues << "\t" << count << "\n";
 }
 
 void unsignedBinMult::sum()

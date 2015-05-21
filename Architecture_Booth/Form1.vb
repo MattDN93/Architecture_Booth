@@ -41,7 +41,7 @@
             End If
 
             If rad2Booth = True Then
-                ubmProcess.StartInfo.FileName = "radix2Booth.exe"
+                ubmProcess.StartInfo.FileName = "radix2-Booth.exe"
                 ubmProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
             End If
 
@@ -77,7 +77,7 @@
             outputListBox.Text = "File opening error. Check the path again!"
             Exit Sub
         End Try
-        outputListBox.AppendText(procText)
+        outputListBox.Text = procText                      'write text to output box
 
         unsignedMult = False
         rad2Booth = False

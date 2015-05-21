@@ -53,7 +53,7 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(94, 26)
+        Me.Label1.Location = New System.Drawing.Point(195, 25)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(415, 20)
         Me.Label1.TabIndex = 0
@@ -62,7 +62,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(52, 52)
+        Me.Label2.Location = New System.Drawing.Point(153, 51)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(503, 26)
         Me.Label2.TabIndex = 1
@@ -75,7 +75,7 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem, Me.TheoryToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(588, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(804, 24)
         Me.MenuStrip1.TabIndex = 2
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -113,7 +113,7 @@ Partial Class Form1
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.procChoiceList)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 81)
+        Me.GroupBox1.Location = New System.Drawing.Point(113, 80)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(263, 64)
         Me.GroupBox1.TabIndex = 3
@@ -138,7 +138,7 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.q_InputTextBox)
         Me.GroupBox2.Controls.Add(Me.m_InputTextBox)
-        Me.GroupBox2.Location = New System.Drawing.Point(292, 81)
+        Me.GroupBox2.Location = New System.Drawing.Point(393, 80)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(221, 64)
         Me.GroupBox2.TabIndex = 4
@@ -198,7 +198,7 @@ Partial Class Form1
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.doMultButton)
-        Me.GroupBox3.Location = New System.Drawing.Point(518, 81)
+        Me.GroupBox3.Location = New System.Drawing.Point(619, 80)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(64, 64)
         Me.GroupBox3.TabIndex = 5
@@ -209,7 +209,7 @@ Partial Class Form1
         '
         Me.outputListBox.Location = New System.Drawing.Point(6, 19)
         Me.outputListBox.Name = "outputListBox"
-        Me.outputListBox.Size = New System.Drawing.Size(558, 211)
+        Me.outputListBox.Size = New System.Drawing.Size(768, 247)
         Me.outputListBox.TabIndex = 6
         Me.outputListBox.Text = ""
         '
@@ -218,7 +218,7 @@ Partial Class Form1
         Me.GroupBox4.Controls.Add(Me.outputListBox)
         Me.GroupBox4.Location = New System.Drawing.Point(12, 151)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(570, 236)
+        Me.GroupBox4.Size = New System.Drawing.Size(780, 272)
         Me.GroupBox4.TabIndex = 7
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Results"
@@ -227,7 +227,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(588, 399)
+        Me.ClientSize = New System.Drawing.Size(804, 435)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
