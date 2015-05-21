@@ -20,6 +20,7 @@ public:
 	int input_M;			//multiplicand in integer form
 	string m_string;
 	vector <int> bin_M;		//multiplicand in binary form
+	vector <int> M_initial;		//multiplier in binary form
 
 	int input_Q;			//multiplier in integer form
 	string q_string;
@@ -30,6 +31,7 @@ public:
 	int count;
 	int n_Q;
 	int qn;
+	bool flag;
 
 	void add();
 	void asr();
@@ -49,9 +51,9 @@ Radix2Booth::~Radix2Booth()
 
 void Radix2Booth::toBinary(int m_in, int q_in)
 {
-	bin_M.resize(8);
-	bin_Q.resize(8);
-	int b = 8;
+	bin_M.resize(16);
+	bin_Q.resize(16);
+	int b = 16;
 
 	outValues << "\nBinary Value Built:" << endl;
 	outValues << "\nMultiplicand(M):";
@@ -63,7 +65,7 @@ void Radix2Booth::toBinary(int m_in, int q_in)
 		m_in /= 2;
 	}
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 16; i++)
 	{
 		outValues << bin_M[i];
 	}
@@ -71,7 +73,7 @@ void Radix2Booth::toBinary(int m_in, int q_in)
 	outValues << "\n\nMultiplier (Q):" << endl;
 	outValues << "--------------------------" << endl;
 
-	b = 8;		//reset the value of the counter 
+	b = 16;		//reset the value of the counter 
 
 	while (q_in != 0)
 	{
@@ -79,11 +81,11 @@ void Radix2Booth::toBinary(int m_in, int q_in)
 		q_in /= 2;
 	}
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 16; i++)
 	{
 		outValues << bin_Q[i];
 	}
-	outValues << "\n\nMultiplier Q0: " << bin_Q[0]<< endl;
+	outValues << "\n\nMultiplier Q[0]Q[-1]: " << bin_Q[15]<< "0" <<endl<<endl;
 }
 
 void Radix2Booth::two_complement(char c)
@@ -96,7 +98,7 @@ void Radix2Booth::two_complement(char c)
 
 		carry=1;
 
-		for(int i=bin_M.size(); i>0; i--){
+		for(int i=bin_M.size()-1; i>=0; i--){
 
 			if(carry)bin_M[i]++;
 
@@ -116,7 +118,7 @@ void Radix2Booth::two_complement(char c)
 
 		carry=1;
 
-		for(int i=bin_Q.size(); i>0; i--){
+		for(int i=bin_Q.size()-1; i>=0; i--){
 
 			if(carry)bin_Q[i]++;
 
@@ -136,7 +138,10 @@ void Radix2Booth::add()
 	int i, c = 0;
 	for (i = 0; i < n_Q ; i++)
 	{
-		acc[i] = acc[i] + bin_M[i] + c;
+		if(flag==true)
+		{acc[i] = acc[i] + M_initial[i] + c;}
+		else 
+		{acc[i] = acc[i] + bin_M[i] + c;}
 		if (acc[i] > 1)
 		{
 			acc[i] = acc[i] % 2;
@@ -154,7 +159,7 @@ void Radix2Booth::asr()
 
 	temp = acc[0];
 	qn = bin_Q[0];
-	outValues << "\t\tashr\t\t";
+	outValues << "\t\tRight Shift\t\t";
 	for (i = 0; i < n_Q - 1; i++)
 	{
 		acc[i] = acc[i + 1];
@@ -167,9 +172,9 @@ void Radix2Booth::display()
 {
 	for (int i = n_Q - 1; i >= 0; i--)
 		outValues << acc[i];
-	cout << " ";
+	outValues << " ";
 	for (int i = n_Q - 1; i >= 0; i--)
-		outValues << acc[i];
+		outValues << bin_Q[i];
 }
 
 int main(int argc, char **argv)
@@ -178,6 +183,8 @@ int main(int argc, char **argv)
 
 	int temp = 0;
 
+	b2.acc.resize(16);
+
 	for(int i=0; i<16; i++){
 		b2.acc[i]=0;
 	}
@@ -185,8 +192,11 @@ int main(int argc, char **argv)
 	b2.input_M = 0;		
 	b2.input_Q = 0;	
 
-	b2.input_M = atoi(argv[1]);
-	b2.input_Q = atoi(argv[2]);
+	//b2.input_M = atoi(argv[1]);
+	//b2.input_Q = atoi(argv[2]);
+
+	b2.input_M=-5;
+	b2.input_Q=10;
 
 	b2.outValues.open("valuesToDisplay.txt");
 	b2.outValues << b2.input_M <<"\t"<< b2.input_Q;
@@ -196,12 +206,27 @@ int main(int argc, char **argv)
 	if(b2.input_M < 0) b2.two_complement('M');
 	if(b2.input_Q < 0) b2.two_complement('Q');
 
+	b2.M_initial.resize(16);
+
+	for(int i=0;i<16;i++)	b2.M_initial[i]=b2.bin_M[i];
+
+	b2.two_complement('M');
+
+	for(int i=0;i<16;i++)	b2.outValues <<b2.bin_M[i];
+	b2.outValues <<"\n";
+	for(int i=0;i<16;i++)	b2.outValues <<b2.M_initial[i];
+	b2.outValues <<"\n";
+
 	b2.n_Q = b2.bin_Q.size();
 	b2.count= b2.n_Q;
 	b2.qn = 0;
 	
-	cout << "qn\tq[n+1]\t\tBR\t\tAC\tQR\t\tsc\n";
-	cout << "\t\t\tinitial\t\t";
+	b2.outValues << "Q(-1)\tQ[n]\t\tOPERATION\t\tACC\t\tQ\t\t\tCOUNT\n";
+	b2.outValues << "\t\t\tinitial\t\t";
+
+	reverse(b2.bin_M.begin(),b2.bin_M.end());
+	reverse(b2.bin_Q.begin(),b2.bin_Q.end());
+	reverse(b2.M_initial.begin(),b2.M_initial.end());
 
 	b2.display();
 
@@ -209,29 +234,31 @@ int main(int argc, char **argv)
 
 	while (b2.count != 0)
 	{
-		b2.outValues << b2.bin_Q[0] << "\t" << qn;
-		if ((qn + b2.bin_Q[0]) == 1)
+		b2.outValues << b2.qn << "\t" << b2.bin_Q[0];
+		if ((b2.qn + b2.bin_Q[0]) == 1)
 		{
 			if (temp == 0)
 			{
+				b2.flag=false;
 				b2.add();
-				b2.outValues << "\t\tsubtracting BR\t";
+				b2.outValues << "\t\tSubtraction\t";
 				for (int i = b2.n_Q - 1; i >= 0; i--)
 					b2.outValues << b2.acc[i];
 				temp = 1;
 			}
 			else if (temp == 1)
 			{
+				b2.flag=true;
 				b2.add();
-				b2.outValues << "\t\tadding BR\t";
+				b2.outValues << "\t\tAddition\t";
 				for (int i = b2.n_Q - 1; i >= 0; i--)
-					cout << b2.acc[i];
+					b2.outValues << b2.acc[i];
 				temp = 0;
 			}
 			b2.outValues << "\n\t";
 			b2.asr();
 		}
-		else if (qn - b2.bin_Q[0] == 0)
+		else if (b2.qn - b2.bin_Q[0] == 0)
 			b2.asr();
 
 		b2.display();
