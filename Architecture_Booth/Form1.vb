@@ -70,7 +70,7 @@
         Select Case procChoiceList.SelectedItem
             Case "Unsigned number multiplication"
         End Select
-       
+
 
     End Sub
 End Class

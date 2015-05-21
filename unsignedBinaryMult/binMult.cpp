@@ -13,7 +13,7 @@ public:
 	unsignedBinMult();
 	~unsignedBinMult();
 
-	void toBinary();
+	void toBinary(int,int);
 	void sum();
 	void rightShift();
 
@@ -54,7 +54,21 @@ void main(int argc, char** argv)
 	ubm.input_Q = atoi(argv[2]);
 
 	ubm.outValues.open("valuesToDisplay.txt");
-	ubm.outValues << "Successfully read from C++ execution." << endl;
+	//ubm.outValues << "Successfully read from C++ execution." << endl;
 	ubm.outValues << ubm.input_M <<"\t"<< ubm.input_Q;
+
+}
+
+void unsignedBinMult::toBinary(int m_in, int q_in)
+{
+	int b = 8;
+	while (m_in != 0)
+	{
+		bin_M[--b] = m_in % 2;
+		outValues << "Binary Value Built:" << endl;
+		
+		m_in /= 2;
+	}
+
 
 }
