@@ -40,11 +40,13 @@ Partial Class Form1
         Me.m_InputTextBox = New System.Windows.Forms.TextBox()
         Me.doMultButton = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.outputListBox = New System.Windows.Forms.ListBox()
+        Me.outputListBox = New System.Windows.Forms.RichTextBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -205,18 +207,28 @@ Partial Class Form1
         '
         'outputListBox
         '
-        Me.outputListBox.FormattingEnabled = True
-        Me.outputListBox.Location = New System.Drawing.Point(13, 152)
+        Me.outputListBox.Location = New System.Drawing.Point(6, 19)
         Me.outputListBox.Name = "outputListBox"
-        Me.outputListBox.Size = New System.Drawing.Size(563, 238)
+        Me.outputListBox.Size = New System.Drawing.Size(558, 211)
         Me.outputListBox.TabIndex = 6
+        Me.outputListBox.Text = ""
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.outputListBox)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 151)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(570, 236)
+        Me.GroupBox4.TabIndex = 7
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Results"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(588, 399)
-        Me.Controls.Add(Me.outputListBox)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -232,6 +244,7 @@ Partial Class Form1
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -254,6 +267,7 @@ Partial Class Form1
     Friend WithEvents m_InputTextBox As System.Windows.Forms.TextBox
     Friend WithEvents doMultButton As System.Windows.Forms.Button
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents outputListBox As System.Windows.Forms.ListBox
+    Friend WithEvents outputListBox As System.Windows.Forms.RichTextBox
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
 
 End Class

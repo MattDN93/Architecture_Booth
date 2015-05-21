@@ -74,10 +74,10 @@
             procText = My.Computer.FileSystem.ReadAllText("valuesToDisplay.txt")
         Catch ex As IO.FileNotFoundException
             MsgBox("The file could not be read from. Can't continue.", MsgBoxStyle.Critical, "An I/O Error Occurred!")
+            outputListBox.Text = "File opening error. Check the path again!"
             Exit Sub
         End Try
-        outputListBox.Items.Add(procText)
-        outputListBox.Items.Add("this is a test")
+        outputListBox.AppendText(procText)
 
         unsignedMult = False
         rad2Booth = False
@@ -97,7 +97,7 @@
                 rad2Booth = False
                 rad4Booth = False
                 rad8Booth = False
-                MsgBox("doing USIGN")
+                'MsgBox("doing USIGN")
 
                 q_InputTextBox.Clear()
                 m_InputTextBox.Clear()
@@ -109,7 +109,7 @@
                 unsignedMult = False
                 rad4Booth = False
                 rad8Booth = False
-                MsgBox("doing radix2")
+                'MsgBox("doing radix2")
 
                 q_InputTextBox.Clear()
                 m_InputTextBox.Clear()
@@ -121,7 +121,7 @@
                 unsignedMult = True
                 rad2Booth = False
                 rad8Booth = False
-                MsgBox("doing radix4")
+                ' MsgBox("doing radix4")
 
                 q_InputTextBox.Clear()
                 m_InputTextBox.Clear()
@@ -134,7 +134,7 @@
                 rad2Booth = False
                 rad4Booth = False
 
-                MsgBox("doing radix8")
+                'MsgBox("doing radix8")
                 q_InputTextBox.Clear()
                 m_InputTextBox.Clear()
 

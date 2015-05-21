@@ -59,8 +59,8 @@ void main(int argc, char** argv)
 
 	if (DEBUG)
 	{
-		ubm.input_M = 22;
-		ubm.input_Q = 2;
+		//ubm.input_M = 22;
+		//ubm.input_Q = 2;
 	}
 	if (!DEBUG)
 	{
@@ -138,7 +138,7 @@ void unsignedBinMult::toBinary(int m_in, int q_in)
 
 
 	if (DEBUG){
-		system("pause");
+		//system("pause");
 	}
 
 
