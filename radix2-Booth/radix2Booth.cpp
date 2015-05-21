@@ -55,7 +55,7 @@ void Radix2Booth::toBinary(int m_in, int q_in)
 	bin_Q.resize(16);
 	int b = 16;
 
-	outValues << "\nBinary Value Built:" << endl;
+	outValues << endl;
 	outValues << "\nMultiplicand(M):";
 	outValues << "\n--------------------------" << endl;
 
@@ -159,7 +159,7 @@ void Radix2Booth::asr()
 
 	temp = acc[0];
 	qn = bin_Q[0];
-	outValues << "\t\tRight Shift\t\t";
+	outValues << "\t\tRight Shift\t";
 	for (i = 0; i < n_Q - 1; i++)
 	{
 		acc[i] = acc[i + 1];
@@ -192,14 +192,11 @@ int main(int argc, char **argv)
 	b2.input_M = 0;		
 	b2.input_Q = 0;	
 
-	//b2.input_M = atoi(argv[1]);
-	//b2.input_Q = atoi(argv[2]);
-
-	b2.input_M=-5;
-	b2.input_Q=10;
+	b2.input_M = atoi(argv[1]);
+	b2.input_Q = atoi(argv[2]);
 
 	b2.outValues.open("valuesToDisplay.txt");
-	b2.outValues << b2.input_M <<"\t"<< b2.input_Q;
+	b2.outValues << b2.input_M <<"\t"<<"X"<< "\t"<<b2.input_Q;
 
 	b2.toBinary(b2.input_M, b2.input_Q);			//convert M and Q to binary
 
@@ -212,16 +209,11 @@ int main(int argc, char **argv)
 
 	b2.two_complement('M');
 
-	for(int i=0;i<16;i++)	b2.outValues <<b2.bin_M[i];
-	b2.outValues <<"\n";
-	for(int i=0;i<16;i++)	b2.outValues <<b2.M_initial[i];
-	b2.outValues <<"\n";
-
 	b2.n_Q = b2.bin_Q.size();
 	b2.count= b2.n_Q;
 	b2.qn = 0;
 	
-	b2.outValues << "Q(-1)\tQ[n]\t\tOPERATION\t\tACC\t\tQ\t\t\tCOUNT\n";
+	b2.outValues << "Q(-1)\tQ[n]\t\tOPERATION\t\tACC\t\tQ\t\tCOUNT\n";
 	b2.outValues << "\t\t\tinitial\t\t";
 
 	reverse(b2.bin_M.begin(),b2.bin_M.end());
@@ -230,7 +222,7 @@ int main(int argc, char **argv)
 
 	b2.display();
 
-	b2.outValues << "\t\t" << b2.count << "\n";
+	b2.outValues << "\t" << b2.count << "\n";
 
 	while (b2.count != 0)
 	{
@@ -262,11 +254,10 @@ int main(int argc, char **argv)
 			b2.asr();
 
 		b2.display();
-		b2.outValues << "\t";
-
+	
 		b2.count--;
 		b2.outValues << "\t" << b2.count << "\n";
 	}
-	b2.outValues << "Result=";
+	b2.outValues <<endl<< "Result=  ";
 	b2.display();
 }
