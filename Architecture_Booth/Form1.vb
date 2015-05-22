@@ -46,30 +46,48 @@
             If unsignedMult = True Then
                 ubmProcess.StartInfo.FileName = "unsignedBinaryMult.exe"
                 ubmProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
+                ubmProcess.StartInfo.Arguments = m_q_concat
+                ubmProcess.Start()
+                'Wait until the process passes back an exit code 
+                ubmProcess.WaitForExit()
+                'Free resources associated with this process
+                ubmProcess.Close()
             End If
 
             If rad2Booth = True Then
                 ubmProcess.StartInfo.FileName = "radix2-Booth.exe"
                 ubmProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
+                ubmProcess.StartInfo.Arguments = m_q_concat
+                ubmProcess.Start()
+                'Wait until the process passes back an exit code 
+                ubmProcess.WaitForExit()
+                'Free resources associated with this process
+                ubmProcess.Close()
             End If
 
             If rad4Booth = True Then
-                ubmProcess.StartInfo.FileName = "radix4Booth.exe"
+                ubmProcess.StartInfo.FileName = "radix4_Booth.exe"
                 ubmProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
+                ubmProcess.StartInfo.Arguments = m_q_concat
+                ubmProcess.Start()
+                'Wait until the process passes back an exit code 
+                ubmProcess.WaitForExit()
+                'Free resources associated with this process
+                ubmProcess.Close()
             End If
 
             If rad8Booth = True Then
-                ubmProcess.StartInfo.FileName = "radix8Booth.exe"
+                ubmProcess.StartInfo.FileName = "radix8_Booth.exe"
                 ubmProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
+                ubmProcess.StartInfo.Arguments = m_q_concat
+                ubmProcess.Start()
+                'Wait until the process passes back an exit code 
+                ubmProcess.WaitForExit()
+                'Free resources associated with this process
+                ubmProcess.Close()
             End If
 
-            ubmProcess.StartInfo.Arguments = m_q_concat
-            ubmProcess.Start()
 
-            'Wait until the process passes back an exit code 
-            ubmProcess.WaitForExit()
-            'Free resources associated with this process
-            ubmProcess.Close()
             'Catch
             'Try
             '    Process.Start(Application.StartupPath & "\\unsignedBinaryMult.exe", m_q_concat)
