@@ -282,7 +282,7 @@ int Radix8Booth::BinToDec(vector <int> &t1)
 	b8.outValues << b8.BinToDec(b8.acc) << endl;
 
 	loopcount++;
-	cout<<loopcount;
+	cout<<loopcount<<endl;
 	}
 	clock_t end=clock();
 

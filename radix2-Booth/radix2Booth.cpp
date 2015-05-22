@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <conio.h>
+#include <ctime>
 using namespace std;
 
 class Radix2Booth
@@ -177,87 +178,106 @@ void Radix2Booth::display()
 		outValues << bin_Q[i];
 }
 
+double calctime(clock_t time1, clock_t time2) {  //function to calculate time elapsed
+	double diff = time1 - time2;
+	double diffms = (diff * 1000) / CLOCKS_PER_SEC;	//milliseconds
+	return diffms;
+}
+
 int main(int argc, char **argv)
 {
 	Radix2Booth b2;
-
-	int temp = 0;
-
-	b2.acc.resize(16);
-
-	for(int i=0; i<16; i++){
-		b2.acc[i]=0;
-	}
-	
-	b2.input_M = 0;		
-	b2.input_Q = 0;	
-
-	b2.input_M = atoi(argv[1]);
-	b2.input_Q = atoi(argv[2]);
-
-	b2.outValues.open("valuesToDisplay.txt");
-	b2.outValues << b2.input_M <<"\t"<<"X"<< "\t"<<b2.input_Q;
-
-	b2.toBinary(b2.input_M, b2.input_Q);			//convert M and Q to binary
-
-	if(b2.input_M < 0) b2.two_complement('M');
-	if(b2.input_Q < 0) b2.two_complement('Q');
-
-	b2.M_initial.resize(16);
-
-	for(int i=0;i<16;i++)	b2.M_initial[i]=b2.bin_M[i];
-
-	b2.two_complement('M');
-
-	b2.n_Q = b2.bin_Q.size();
-	b2.count= b2.n_Q;
-	b2.qn = 0;
-	
-	b2.outValues << "Q(-1)\tQ[n]\t\tOPERATION\t\tACC\t\tQ\t\tCOUNT\n";
-	b2.outValues << "\t\t\tinitial\t\t";
-
-	reverse(b2.bin_M.begin(),b2.bin_M.end());
-	reverse(b2.bin_Q.begin(),b2.bin_Q.end());
-	reverse(b2.M_initial.begin(),b2.M_initial.end());
-
-	b2.display();
-
-	b2.outValues << "\t" << b2.count << "\n";
-
-	while (b2.count != 0)
+	int loopcount = 0;
+	clock_t begin = clock();
+	while (loopcount < 100000)
 	{
-		b2.outValues << b2.qn << "\t" << b2.bin_Q[0];
-		if ((b2.qn + b2.bin_Q[0]) == 1)
-		{
-			if (temp == 0)
-			{
-				b2.flag=false;
-				b2.add();
-				b2.outValues << "\t\tSubtraction\t";
-				for (int i = b2.n_Q - 1; i >= 0; i--)
-					b2.outValues << b2.acc[i];
-				temp = 1;
-			}
-			else if (temp == 1)
-			{
-				b2.flag=true;
-				b2.add();
-				b2.outValues << "\t           Addition\t\t";
-				for (int i = b2.n_Q - 1; i >= 0; i--)
-					b2.outValues << b2.acc[i];
-				temp = 0;
-			}
-			b2.outValues << "\n\t";
-			b2.asr();
+
+
+
+		int temp = 0;
+
+		b2.acc.resize(16);
+
+		for (int i = 0; i < 16; i++){
+			b2.acc[i] = 0;
 		}
-		else if (b2.qn - b2.bin_Q[0] == 0)
-			b2.asr();
+
+		b2.input_M = 0;
+		b2.input_Q = 0;
+
+		b2.input_M = atoi(argv[1]);
+		b2.input_Q = atoi(argv[2]);
+
+		b2.outValues.open("valuesToDisplay.txt");
+		b2.outValues << b2.input_M << "\t" << "X" << "\t" << b2.input_Q;
+
+		b2.toBinary(b2.input_M, b2.input_Q);			//convert M and Q to binary
+
+		if (b2.input_M < 0) b2.two_complement('M');
+		if (b2.input_Q < 0) b2.two_complement('Q');
+
+		b2.M_initial.resize(16);
+
+		for (int i = 0; i < 16; i++)	b2.M_initial[i] = b2.bin_M[i];
+
+		b2.two_complement('M');
+
+		b2.n_Q = b2.bin_Q.size();
+		b2.count = b2.n_Q;
+		b2.qn = 0;
+
+		b2.outValues << "Q(-1)\tQ[n]\t\tOPERATION\t\tACC\t\tQ\t\tCOUNT\n";
+		b2.outValues << "\t\t\tinitial\t\t";
+
+		reverse(b2.bin_M.begin(), b2.bin_M.end());
+		reverse(b2.bin_Q.begin(), b2.bin_Q.end());
+		reverse(b2.M_initial.begin(), b2.M_initial.end());
 
 		b2.display();
-	
-		b2.count--;
+
 		b2.outValues << "\t" << b2.count << "\n";
+
+		while (b2.count != 0)
+		{
+			b2.outValues << b2.qn << "\t" << b2.bin_Q[0];
+			if ((b2.qn + b2.bin_Q[0]) == 1)
+			{
+				if (temp == 0)
+				{
+					b2.flag = false;
+					b2.add();
+					b2.outValues << "\t\tSubtraction\t";
+					for (int i = b2.n_Q - 1; i >= 0; i--)
+						b2.outValues << b2.acc[i];
+					temp = 1;
+				}
+				else if (temp == 1)
+				{
+					b2.flag = true;
+					b2.add();
+					b2.outValues << "\t           Addition\t\t";
+					for (int i = b2.n_Q - 1; i >= 0; i--)
+						b2.outValues << b2.acc[i];
+					temp = 0;
+				}
+				b2.outValues << "\n\t";
+				b2.asr();
+			}
+			else if (b2.qn - b2.bin_Q[0] == 0)
+				b2.asr();
+
+			b2.display();
+
+			b2.count--;
+			b2.outValues << "\t" << b2.count << "\n";
+		}
+		b2.outValues << endl << "Result=  ";
+		b2.display();
+
+		loopcount++;
+		cout << loopcount << endl;
 	}
-	b2.outValues <<endl<< "Result=  ";
-	b2.display();
+	clock_t end = clock();
+
+	b2.outValues << endl << "Time Elapsed: " << double(calctime(end, begin)) << "milliseconds";
 }
