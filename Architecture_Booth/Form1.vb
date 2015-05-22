@@ -54,7 +54,7 @@
             End If
 
             If rad4Booth = True Then
-                ubmProcess.StartInfo.FileName = "radix4Booth.exe"
+                ubmProcess.StartInfo.FileName = "radix4_Booth.exe"
                 ubmProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
             End If
 
