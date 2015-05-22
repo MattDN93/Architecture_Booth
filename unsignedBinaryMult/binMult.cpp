@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
+#include <ctime>
 using namespace std;
 
 #define DEBUG 0							//set this to enable debug features
@@ -52,34 +53,54 @@ unsignedBinMult::~unsignedBinMult()
 {
 }
 
+double diffclock(clock_t clock1, clock_t clock2)
+{
+	double diffticks = clock1 - clock2;
+	double diffms = (diffticks /** 1000*/) / CLOCKS_PER_SEC;
+	return diffms;
+}
+
 void main(int argc, char** argv)		//main receiving arguments (M and Q)
 {
 	unsignedBinMult ubm;				//instantiate object of class
-
-	if (DEBUG)
+	int loopcount = 0;
+	clock_t compress_begin_running = clock();
+	while (loopcount <= 100000)
 	{
-		//ubm.input_M = 22;
-		//ubm.input_Q = 2;
+	
+		if (DEBUG)
+		{
+			//ubm.input_M = 22;
+			//ubm.input_Q = 2;
+		}
+		if (!DEBUG)
+		{
+			ubm.input_M = atoi(argv[1]);				//receive args
+			ubm.input_Q = atoi(argv[2]);				//receive args from VB
+		}
+
+
+		ubm.outValues.open("valuesToDisplay.txt");
+		//ubm.outValues << "Successfully read from C++ execution." << endl;
+		ubm.outValues << "\nValues Entered:" << endl;
+		ubm.outValues << ubm.input_M << "\t" << ubm.input_Q;	//read from VB process
+
+		ubm.toBinary(ubm.input_M, ubm.input_Q);			//convert M and Q to binary
+		ubm.doMult();									// do the multiplication
+
+		ubm.outValues << "\n--------------------------" << endl;
+		ubm.outValues << "\nResult: "; ubm.outIntArr(ubm.acc); ubm.outValues << " "; ubm.outIntArr(ubm.bin_Q);
+		ubm.outValues << "\n--------------------------" << endl;
+									//close the file
+		loopcount++;
+		cout << loopcount << endl;
 	}
-	if (!DEBUG)
-	{
-		ubm.input_M = atoi(argv[1]);				//receive args
-		ubm.input_Q = atoi(argv[2]);				//receive args from VB
-	}
-
-
-	ubm.outValues.open("valuesToDisplay.txt");
-	//ubm.outValues << "Successfully read from C++ execution." << endl;
-	ubm.outValues << "\nValues Entered:" << endl;
-	ubm.outValues << ubm.input_M <<"\t"<< ubm.input_Q;	//read from VB process
-
-	ubm.toBinary(ubm.input_M, ubm.input_Q);			//convert M and Q to binary
-	ubm.doMult();									// do the multiplication
+	clock_t compress_end_running = clock();
 
 	ubm.outValues << "\n--------------------------" << endl;
-	ubm.outValues << "\nResult: "; ubm.outIntArr(ubm.acc); ubm.outValues << " "; ubm.outIntArr(ubm.bin_Q);
+	ubm.outValues << "\nTiming Result: " << double(diffclock(compress_end_running, compress_begin_running)) << endl;
 	ubm.outValues << "\n--------------------------" << endl;
-	ubm.outValues.close();							//close the file
+	ubm.outValues.close();
 
 
 }
@@ -197,7 +218,7 @@ void unsignedBinMult::rightShift()						//do the right shift
 
 	temp = acc[BITSIZE-1];								//ensure bits from ACC LSB go to Q MSB
 	// = qr[0];
-	cout << "\t\tashr\t\t";
+	//cout << "\t\tashr\t\t";
 	for (int i = BITSIZE - 1; i > 0 ; i--)
 	{
 		acc[i] = acc[i - 1];
